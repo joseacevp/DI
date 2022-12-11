@@ -5,7 +5,8 @@
  */
 package Reloj;
 
-import java.sql.Date;
+//import java.sql.Date;
+import java.util.Date;
 import javax.swing.JCheckBox;
 
 /**
@@ -35,6 +36,8 @@ public class AlarmaPanel extends javax.swing.JPanel {
         jCheckBox1 = new javax.swing.JCheckBox();
 
         jLabel1.setText("Hora de Alarma:");
+
+        jSpinner1.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(), null, null, java.util.Calendar.HOUR_OF_DAY));
 
         jCheckBox1.setText("Activar");
 

@@ -9,6 +9,6 @@ package Reloj;
  *
  * @author josea
  */
-class AlarmaListener {
-    public void suenaAlarma(){}
+public interface AlarmaListener {
+    public void suenaAlarma();
 }
