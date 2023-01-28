@@ -16,6 +16,8 @@ public class Ventana extends javax.swing.JDialog {
      * Creates new form Ventana
      */
     Reserva reserva = new Reserva();
+    EsNumero posibleNumero = new EsNumero();
+    EsMail posibleMail = new EsMail();
     
     public Ventana(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -46,6 +48,8 @@ public class Ventana extends javax.swing.JDialog {
         areaTelefono = new javax.swing.JTextField();
         tituloNombre2 = new javax.swing.JLabel();
         tituloNombre = new javax.swing.JLabel();
+        tituloNombre3 = new javax.swing.JLabel();
+        areaEmail = new javax.swing.JTextField();
         tituloVentanaReserva = new javax.swing.JLabel();
         panelEvento = new javax.swing.JPanel();
         selectorBanquete = new javax.swing.JRadioButton();
@@ -97,6 +101,15 @@ public class Ventana extends javax.swing.JDialog {
         tituloNombre.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         tituloNombre.setText("Nombre:");
 
+        tituloNombre3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        tituloNombre3.setText("Email:");
+
+        areaEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                areaEmailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelPersonalesLayout = new javax.swing.GroupLayout(panelPersonales);
         panelPersonales.setLayout(panelPersonalesLayout);
         panelPersonalesLayout.setHorizontalGroup(
@@ -104,6 +117,10 @@ public class Ventana extends javax.swing.JDialog {
             .addGroup(panelPersonalesLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(panelPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelPersonalesLayout.createSequentialGroup()
+                        .addComponent(tituloNombre3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(areaEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelPersonalesLayout.createSequentialGroup()
                         .addComponent(tituloNombre2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -116,7 +133,7 @@ public class Ventana extends javax.swing.JDialog {
                         .addGroup(panelPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(areaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(areaTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         panelPersonalesLayout.setVerticalGroup(
             panelPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,11 +146,15 @@ public class Ventana extends javax.swing.JDialog {
                 .addGroup(panelPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tituloNombre1)
                     .addComponent(areaTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(panelPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tituloNombre3)
+                    .addComponent(areaEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tituloNombre2)
                     .addComponent(selectorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         tituloVentanaReserva.setBackground(new java.awt.Color(204, 204, 204));
@@ -280,7 +301,7 @@ public class Ventana extends javax.swing.JDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(numeroHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(numeroJornadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,7 +367,15 @@ public class Ventana extends javax.swing.JDialog {
 
     private void botonGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGrabarActionPerformed
         reserva.setNombre(areaNombre.getText());
-        reserva.setTelefono(areaTelefono.getText());
+        
+        if(true==posibleMail.esMail(String.valueOf(areaEmail.getText()))){
+            reserva.setEmail(areaEmail.getText());
+        }
+        
+        if (true==posibleNumero.esNumero(String.valueOf(areaTelefono.getText()))){
+            reserva.setTelefono(areaTelefono.getText());
+        }
+        
         reserva.setAsistentes((int) numeroAsistentes.getValue());
         reserva.setFecha((Date) selectorFecha.getValue());
         reserva.setHabitaciones((int) numeroHabitaciones.getValue());
@@ -379,6 +408,10 @@ public class Ventana extends javax.swing.JDialog {
     private void areaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_areaNombreActionPerformed
+
+    private void areaEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_areaEmailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -423,6 +456,7 @@ public class Ventana extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField areaEmail;
     private javax.swing.JTextField areaNombre;
     private javax.swing.JTextField areaTelefono;
     private javax.swing.JButton botonGrabar;
@@ -448,6 +482,7 @@ public class Ventana extends javax.swing.JDialog {
     private javax.swing.JLabel tituloNombre;
     private javax.swing.JLabel tituloNombre1;
     private javax.swing.JLabel tituloNombre2;
+    private javax.swing.JLabel tituloNombre3;
     private javax.swing.JLabel tituloNumeroAsistentes;
     private javax.swing.JLabel tituloNumeroJornadas;
     private javax.swing.JLabel tituloVentanaReserva;
