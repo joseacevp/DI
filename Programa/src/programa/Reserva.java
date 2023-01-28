@@ -21,11 +21,12 @@ public class Reserva {
     private int asistentes;
     private int jornadas;
     private int habitaciones;
+    private String email;
 
     public Reserva() {
     }
 
-    public Reserva(String nombre, String telefono, Date fecha, String t_evento, String t_comida, boolean cheff, int asistentes, int jornadas, int habitaciones) {
+    public Reserva(String nombre, String telefono, Date fecha, String t_evento, String t_comida, boolean cheff, int asistentes, int jornadas, int habitaciones, String email) {
         this.nombre = nombre;
         this.telefono = telefono;
         this.fecha = fecha;
@@ -35,13 +36,34 @@ public class Reserva {
         this.asistentes = asistentes;
         this.jornadas = jornadas;
         this.habitaciones = habitaciones;
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
     public String toString() {
-        return "Reserva{" + "nombre=" + nombre + ", telefono=" + telefono + ", fecha=" + fecha + ", t_evento=" + t_evento + ", t_comida=" + t_comida + ", cheff=" + cheff + ", asistentes=" + asistentes + ", jornadas=" + jornadas + ", habitaciones=" + habitaciones + '}';
+        return "Reserva{" + "nombre=" + nombre 
+                + ", telefono=" + telefono 
+                + ", email=" + email 
+                + ", fecha=" + fecha 
+                + ", t_evento=" + t_evento 
+                + ", t_comida=" + t_comida 
+                + ", cheff=" + cheff 
+                + ", asistentes=" + asistentes
+                + ", jornadas=" + jornadas 
+                + ", habitaciones=" + habitaciones
+                + '}';
     }
 
+   
+    
     public String getNombre() {
         return nombre;
     }
