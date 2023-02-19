@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -105,10 +107,15 @@ public class Principal extends javax.swing.JFrame {
             Map parametro = new HashMap();
             parametro.put("id_cliente", textIdCliente.getText());
             
-            JasperPrint print = JasperFillManager.fillReport("Informes/informe2.jasper", parametro,connection);
+            JasperPrint print = JasperFillManager.fillReport("Informes/Ejercicio2/informe2.jasper", parametro,connection);
            //experotar a PDF
             
-            JasperExportManager.exportReportToPdfFile(print,"Informes/informe2.pdf");
+            JasperExportManager.exportReportToPdfFile(print,"Informes/Ejercicio2/informe2.pdf");
+            
+            //mensage realizado correctamente
+            
+            JOptionPane.showMessageDialog(rootPane, "Creado PDF correctamente");
+            System.exit(WIDTH);
 
         } catch (Throwable e) {
             e.printStackTrace();
