@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subInforme4" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5dca93eb-fd26-487b-8ef2-598925ac366b">
-	<queryString language="SQL">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subInforme4" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="5dca93eb-fd26-487b-8ef2-598925ac366b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="NumeroCliente" class="java.lang.String">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<queryString>
 		<![CDATA[SELECT
 clientes.ID_Cliente,
 clientes.Nombre,
@@ -19,7 +25,7 @@ LEFT JOIN pedidos
 on clientes.ID_Cliente = pedidos.ID_Cliente
 LEFT JOIN detalle_pedidos
 on pedidos.ID_Pedido = detalle_pedidos.ID_Pedido
-
+where clientes.id_cliente = $P{NumeroCliente}
 order by clientes.ID_Cliente;]]>
 	</queryString>
 	<field name="ID_Cliente" class="java.lang.Integer">
@@ -52,28 +58,60 @@ order by clientes.ID_Cliente;]]>
 	<field name="Unidades" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<variable name="Precio_1" class="java.math.BigDecimal" resetType="Group" resetGroup="Pedidos" calculation="Sum">
+		<variableExpression><![CDATA[$F{Precio}]]></variableExpression>
+	</variable>
+	<group name="Pedidos">
+		<groupExpression><![CDATA[$F{ID_Pedido}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="341" height="20" backcolor="#FFCCCC" uuid="8c076fe5-9cb6-471a-bf23-d2b8fcd77b89"/>
+					<box leftPadding="0">
+						<pen lineWidth="0.0"/>
+					</box>
+					<textFieldExpression><![CDATA["ID de Pedido: "+$F{ID_Pedido}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="301" y="0" width="294" height="20" backcolor="#FFCCCC" uuid="46a18f24-0aea-4cbb-ab5c-fb2d2e864b9f"/>
+					<box padding="3" topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="11">
+						<pen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA["Fecha del Pedido: "+$F{Fecha_Pedido}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
-		<band height="79" splitType="Stretch"/>
-	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch"/>
-	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="270" y="0" width="138" height="20" uuid="30020a5c-0efa-413f-992a-8567afb44e15"/>
+				<textFieldExpression><![CDATA[$F{Precio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="170" y="0" width="138" height="20" uuid="92d17921-80b0-4b2a-a306-01bb402acb7e"/>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="0" width="138" height="20" uuid="1f272dc0-c43c-4006-ab38-5cefdf49edd7"/>
+				<textFieldExpression><![CDATA[$F{ID_Articulo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="370" y="0" width="138" height="20" uuid="1f3b14ca-5865-44dd-a603-bdad27f0286c"/>
+				<text><![CDATA[Unidades]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="470" y="0" width="125" height="20" uuid="ee1027cd-1720-4f3a-8b9a-8375c7578a6d"/>
+				<textFieldExpression><![CDATA[$F{Unidades}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="0" width="106" height="20" uuid="4bbc446e-7ad1-409b-aa57-254494c81e1d"/>
+				<text><![CDATA[ID_Articulo]]></text>
+			</staticText>
+		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
