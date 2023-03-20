@@ -182,7 +182,7 @@ public class Principal extends javax.swing.JFrame {
             
             //pone ayuda a item de menu al pulsarlo y a F1 en ventana
             //principal y secundaria
-            hb.enableHelpOnButton(this.jMenuItemAyudaP, "ventana_principal",helpset);
+            hb.enableHelpOnButton(this.jMenuItemAyudaP, "aplicacion",helpset);
             hb.enableHelpKey(getRootPane(), "aplicacion", helpset);
             
         }catch(Throwable e){
