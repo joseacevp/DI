@@ -4,14 +4,18 @@
  */
 package programa;
 
+import java.io.File;
+import java.net.URL;
 import java.util.Date;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 
 /**
  *
  * @author josea
  */
 public class Ventana extends javax.swing.JDialog {
-
+    
     /**
      * Creates new form Ventana
      */
@@ -21,7 +25,10 @@ public class Ventana extends javax.swing.JDialog {
     
     public Ventana(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+          
         initComponents();
+        ponLaAyuda();
+                
     }
 
     /**
@@ -63,6 +70,9 @@ public class Ventana extends javax.swing.JDialog {
         separador = new javax.swing.JSeparator();
         numeroHabitaciones = new javax.swing.JSpinner();
         botonGrabar = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuAyuda = new javax.swing.JMenu();
+        jMenuItemAyuda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ventana Reservas");
@@ -273,6 +283,23 @@ public class Ventana extends javax.swing.JDialog {
             }
         });
 
+        jMenuBar1.setFocusable(false);
+
+        jMenuAyuda.setText("Ayuda");
+
+        jMenuItemAyuda.setText("Saber Mas.");
+        jMenuItemAyuda.setFocusable(true);
+        jMenuItemAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAyudaActionPerformed(evt);
+            }
+        });
+        jMenuAyuda.add(jMenuItemAyuda);
+
+        jMenuBar1.add(jMenuAyuda);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -338,8 +365,8 @@ public class Ventana extends javax.swing.JDialog {
                     .addComponent(tituloHabitacione)
                     .addComponent(numeroHabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(botonGrabar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(botonGrabar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -403,6 +430,8 @@ public class Ventana extends javax.swing.JDialog {
         System.out.println(reserva.toString());
         
         this.setVisible(false);//cierra la ventana de reservas
+        System.exit(0);
+                
     }//GEN-LAST:event_botonGrabarActionPerformed
 
     private void areaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaNombreActionPerformed
@@ -413,10 +442,15 @@ public class Ventana extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_areaEmailActionPerformed
 
+    private void jMenuItemAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAyudaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemAyudaActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -439,7 +473,7 @@ public class Ventana extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(Ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+       
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -450,9 +484,30 @@ public class Ventana extends javax.swing.JDialog {
                         System.exit(0);
                     }
                 });
+                 
                 dialog.setVisible(true);
             }
         });
+        
+    }
+     private void ponLaAyuda(){
+        try{
+            //carga del fichero de ayuda.
+            File fichero = new File("helpPrograma"+File.separator+"help_set.hs");
+            URL hsURL = fichero.toURI().toURL();
+            
+            //crea el HelpSet y ek HelpBroker
+            HelpSet helpset = new HelpSet(getClass().getClassLoader(),hsURL);
+            HelpBroker hb = helpset.createHelpBroker();
+            
+            //pone ayuda a item de menu al pulsarlo y a F1 en ventana
+            //principal y secundaria
+            hb.enableHelpOnButton(this.jMenuItemAyuda, "ventana_secundaria",helpset);
+            hb.enableHelpKey(getRootPane(), "aplicacion", helpset);
+            
+        }catch(Throwable e){
+            System.out.println("Fallo en la creación del JavaHelp");
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -463,6 +518,9 @@ public class Ventana extends javax.swing.JDialog {
     private javax.swing.ButtonGroup grupoBotones1;
     private javax.swing.ButtonGroup grupoBotones2;
     private javax.swing.ButtonGroup grupoBotones3;
+    private javax.swing.JMenu jMenuAyuda;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemAyuda;
     private javax.swing.JSpinner numeroAsistentes;
     private javax.swing.JSpinner numeroHabitaciones;
     private javax.swing.JSpinner numeroJornadas;

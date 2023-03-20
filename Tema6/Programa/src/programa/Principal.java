@@ -5,6 +5,10 @@
 package programa;
 
 import java.awt.Graphics;
+import java.io.File;
+import java.net.URL;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
 import javax.swing.ImageIcon;
 
 /**
@@ -18,7 +22,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-
+        ponLaAyuda();
     }
 
     /**
@@ -30,9 +34,15 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
         panelPrincipal = new javax.swing.JPanel();
         tituloPanelPrincipal = new javax.swing.JLabel();
         botonRealizarReserva = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuAyudaPrincipal = new javax.swing.JMenu();
+        jMenuItemAyudaP = new javax.swing.JMenuItem();
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Principal");
@@ -79,6 +89,15 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jMenuAyudaPrincipal.setText("Ayuda");
+
+        jMenuItemAyudaP.setText("Saber mas.");
+        jMenuAyudaPrincipal.add(jMenuItemAyudaP);
+
+        jMenuBar1.add(jMenuAyudaPrincipal);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,11 +120,13 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRealizarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRealizarReservaActionPerformed
-        Ventana ventana = new Ventana(this, true);// pasamos por parmetros this 
+        Ventana ventana = new Ventana(this, false);// pasamos por parmetros this 
         /*   para indicar que se lanzara desde esta ventana y true para indicar que es modal o que
         hasta no cerrarse no podemos proseguir con el programa
          */
         ventana.setVisible(true);
+        this.botonRealizarReserva.setEnabled(false);
+        
 
     }//GEN-LAST:event_botonRealizarReservaActionPerformed
 
@@ -149,9 +170,32 @@ public class Principal extends javax.swing.JFrame {
            
         });
     }
+    private void ponLaAyuda(){
+        try{
+            //carga del fichero de ayuda.
+            File fichero = new File("helpPrograma"+File.separator+"help_set.hs");
+            URL hsURL = fichero.toURI().toURL();
+            
+            //crea el HelpSet y ek HelpBroker
+            HelpSet helpset = new HelpSet(getClass().getClassLoader(),hsURL);
+            HelpBroker hb = helpset.createHelpBroker();
+            
+            //pone ayuda a item de menu al pulsarlo y a F1 en ventana
+            //principal y secundaria
+            hb.enableHelpOnButton(this.jMenuItemAyudaP, "ventana_principal",helpset);
+            hb.enableHelpKey(getRootPane(), "aplicacion", helpset);
+            
+        }catch(Throwable e){
+            System.out.println("Fallo en la creación del JavaHelp");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonRealizarReserva;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenuAyudaPrincipal;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemAyudaP;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JLabel tituloPanelPrincipal;
     // End of variables declaration//GEN-END:variables
