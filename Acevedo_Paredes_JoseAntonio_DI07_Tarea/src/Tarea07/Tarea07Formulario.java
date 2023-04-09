@@ -17,7 +17,7 @@ import javax.swing.text.Highlighter;
 
 /**
  *
- * @author JOse A
+ * @author JOse Antinio Acevedo
  */
 public class Tarea07Formulario extends javax.swing.JFrame {
 
