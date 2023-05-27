@@ -1,1 +1,0 @@
-Este texto esta escrito para realizar pruebas en la tarea 7 de Desarrollo de Interfaces.
