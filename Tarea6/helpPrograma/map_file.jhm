@@ -1,0 +1,5 @@
+<map version="1.0">
+	<mapID target="aplicacion" url="contenido/main.html" />
+	<mapID target="ventana_principal" url="contenido/primera.html" />
+	<mapID target="ventana_secundaria" url="contenido/segunda.html" />
+</map>
