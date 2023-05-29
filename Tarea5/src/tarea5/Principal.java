@@ -105,7 +105,7 @@ public class Principal extends javax.swing.JFrame {
             //creación del imfome pasando el parametro id_cliente capturado 
             
             Map parametro = new HashMap();
-            parametro.put("id_cliente", textIdCliente.getText());
+            parametro.put("Numero_Cliente", textIdCliente.getText());
             
             JasperPrint print = JasperFillManager.fillReport("Informes/Ejercicio2/informe2.jasper", parametro,connection);
            //experotar a PDF

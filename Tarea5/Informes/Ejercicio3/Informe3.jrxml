@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1dbb39c0-5082-4062-a6b9-0cac1af706d5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT *,detalle_pedidos.unidades * detalle_pedidos.precio total_articulo FROM articulos
+inner join detalle_pedidos
+on detalle_pedidos.ID_Articulo = articulos.Id_articulo;]]>
+	</queryString>
+	<field name="Id_articulo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Precio" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_Venta" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Unidades" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_Pedido" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_articulo" class="java.math.BigDecimal"/>
+	<variable name="Unidades_1" class="java.lang.Integer" resetType="Group" resetGroup="Articulos" calculation="Sum">
+		<variableExpression><![CDATA[$F{Unidades}]]></variableExpression>
+	</variable>
+	<group name="Articulos">
+		<groupExpression><![CDATA[$F{Id_articulo}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement x="0" y="10" width="100" height="20" uuid="65bff11d-e164-4147-b7a3-34c062f8b9d8"/>
+					<box leftPadding="5"/>
+					<textFieldExpression><![CDATA["ID articulo: " +$F{Id_articulo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="10" width="243" height="20" uuid="a5c6adca-c2a4-4237-b6c1-0ff682896321"/>
+					<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="Articulos">
+					<reportElement x="368" y="10" width="187" height="20" uuid="d6b7f0fa-d012-4b6d-89cd-e53dfc2b393a"/>
+					<box rightPadding="5"/>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA["Unidades Vendidas: "+$V{Unidades_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="44" backcolor="#99FF99" uuid="d1f1524e-4fb2-4218-84c7-561c60459bc5"/>
+				<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ejercicio 3 de Examen Mayo]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="245">
+			<barChart>
+				<chart>
+					<reportElement x="0" y="0" width="555" height="245" uuid="c20f0b3a-6f19-4fad-8760-793137f075fc"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Cantidad de Articulos Vendidos"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{Id_articulo}]]></categoryExpression>
+						<valueExpression><![CDATA[$V{Unidades_1}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>
