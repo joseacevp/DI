@@ -36,30 +36,18 @@ where clientes.id_cliente = $P{numero_cliente}]]>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<columnHeader>
-		<band height="23" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" uuid="9b197314-69ad-4f38-a3f5-9954bab5a984"/>
-				<text><![CDATA[ID_Pedido]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="142" y="0" width="100" height="20" uuid="b1f97b01-b6c3-4a7e-a2e7-d24db8ddfd62"/>
-				<text><![CDATA[Fecha_Pedido]]></text>
-			</staticText>
-		</band>
-	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="96" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="100" height="20" uuid="6af36a58-28e1-43e1-bc7a-93597a74933a"/>
-				<textFieldExpression><![CDATA[$F{ID_Pedido}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Id Pedido: "+$F{ID_Pedido}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="142" y="0" width="100" height="20" uuid="1160a22b-d374-424a-85cd-768607a5587d"/>
-				<textFieldExpression><![CDATA[$F{Fecha_Pedido}]]></textFieldExpression>
+				<reportElement x="142" y="0" width="168" height="20" uuid="1160a22b-d374-424a-85cd-768607a5587d"/>
+				<textFieldExpression><![CDATA["Fecha pedido: "+$F{Fecha_Pedido}]]></textFieldExpression>
 			</textField>
 			<subreport>
-				<reportElement x="0" y="25" width="555" height="100" uuid="d7693b3d-3ad5-4490-86ae-d3d7ae71ee32"/>
+				<reportElement x="0" y="25" width="555" height="71" uuid="d7693b3d-3ad5-4490-86ae-d3d7ae71ee32"/>
 				<subreportParameter name="numero_pedido">
 					<subreportParameterExpression><![CDATA[$F{ID_Pedido}]]></subreportParameterExpression>
 				</subreportParameter>

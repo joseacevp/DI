@@ -39,29 +39,48 @@ where detalle_pedidos.id_pedido = $P{numero_pedido}]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="total_articulo" class="java.math.BigDecimal"/>
+	<variable name="total_articulo_1" class="java.math.BigDecimal" resetType="Group" resetGroup="Pedido" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_articulo}]]></variableExpression>
+	</variable>
+	<group name="Pedido">
+		<groupExpression><![CDATA[$F{ID_Pedido}]]></groupExpression>
+		<groupHeader>
+			<band height="3"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<textField>
+					<reportElement x="350" y="0" width="192" height="20" uuid="39828d50-feca-49d7-ada7-61afef8fcb01"/>
+					<box rightPadding="5"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA["Total del pedido: "+$V{total_articulo_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<columnHeader>
-		<band height="22" splitType="Stretch">
+		<band height="20">
 			<staticText>
-				<reportElement x="0" y="2" width="68" height="20" uuid="9b2382d5-b6ea-4d6c-bd93-19986d1658cf"/>
+				<reportElement x="0" y="0" width="100" height="20" uuid="d7e861cc-6a13-4908-b5a1-ffa980c88c3f"/>
 				<text><![CDATA[ID_Articulo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="293" y="0" width="72" height="20" uuid="25233413-1b89-4e47-8da2-cc17603c634f"/>
-				<text><![CDATA[Precio]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="365" y="0" width="75" height="20" uuid="5f4202ed-9fbf-4898-a166-5e7c488235af"/>
-				<text><![CDATA[Unidades]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="68" y="2" width="79" height="20" uuid="83d5404f-35f6-47a8-9309-5bcded9bb989"/>
+				<reportElement x="100" y="0" width="100" height="20" uuid="6016fc1c-fbd2-4bda-96a0-d2334ee05f7c"/>
 				<text><![CDATA[Descripcion]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="455" y="2" width="100" height="20" uuid="650af4ac-c550-4dc9-91ea-cb619f3acc4f"/>
+				<reportElement x="200" y="0" width="100" height="20" uuid="2ef8eef4-761c-4262-840b-b46bd031a4f8"/>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="20" uuid="1f60718d-345a-47dc-b571-3b0994d34896"/>
+				<text><![CDATA[Unidades]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="20" uuid="d1891808-e482-4175-bc48-786b4eb4f4fa"/>
 				<text><![CDATA[total_articulo]]></text>
 			</staticText>
 		</band>
@@ -69,24 +88,24 @@ where detalle_pedidos.id_pedido = $P{numero_pedido}]]>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="68" height="20" uuid="9664fa0f-41df-4577-9343-b7d624b4c47b"/>
+				<reportElement x="0" y="0" width="100" height="20" uuid="37337119-b981-44a5-9f23-aecfda48b074"/>
 				<textFieldExpression><![CDATA[$F{ID_Articulo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="68" y="0" width="225" height="20" uuid="e53c5d9c-100e-45c2-ae3d-88dfdb250e86"/>
+				<reportElement x="100" y="0" width="100" height="20" uuid="a3ccc22e-8c65-482c-9ddf-efb2c2dd2b3e"/>
 				<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="455" y="0" width="100" height="20" uuid="99b16994-a925-41c0-b8a7-6b6409215b4e"/>
-				<textFieldExpression><![CDATA[$F{total_articulo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="293" y="0" width="72" height="20" uuid="0c44050f-cf44-4be7-a4a8-229225bc3f33"/>
+				<reportElement x="200" y="0" width="100" height="20" uuid="b4023c79-a601-4e77-8157-b1567dab1f10"/>
 				<textFieldExpression><![CDATA[$F{Precio}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="365" y="0" width="75" height="20" uuid="e3ac3ee9-a7a2-4e4b-8e11-5b177092f7fb"/>
+				<reportElement x="300" y="0" width="100" height="20" uuid="a02f6b2a-2fc6-4f08-b1c3-3fb58192defc"/>
 				<textFieldExpression><![CDATA[$F{Unidades}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="20" uuid="bf363e59-514d-484d-ab62-c5bdf17f4e9a"/>
+				<textFieldExpression><![CDATA[$F{total_articulo}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

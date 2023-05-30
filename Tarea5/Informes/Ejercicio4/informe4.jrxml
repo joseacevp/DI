@@ -7,8 +7,7 @@
 		<defaultValueExpression><![CDATA["C:\\Users\\josea\\Documents\\Git\\DI\\Tarea5\\Informes\\Ejercicio4\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select * from clientes
-]]>
+		<![CDATA[select * from clientes]]>
 	</queryString>
 	<field name="ID_Cliente" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -25,7 +24,7 @@
 	<group name="Clientes" isStartNewPage="true">
 		<groupExpression><![CDATA[$F{ID_Cliente}]]></groupExpression>
 		<groupHeader>
-			<band height="31">
+			<band height="39">
 				<textField>
 					<reportElement mode="Opaque" x="0" y="11" width="77" height="20" backcolor="#CCFFCC" uuid="6bad8ebc-edf7-41d7-8a84-2195ddaff56b"/>
 					<textFieldExpression><![CDATA["Id cliente: "+$F{ID_Cliente}]]></textFieldExpression>
@@ -44,9 +43,6 @@
 				</textField>
 			</band>
 		</groupHeader>
-		<groupFooter>
-			<band height="50"/>
-		</groupFooter>
 	</group>
 	<background>
 		<band splitType="Stretch"/>
@@ -69,9 +65,9 @@
 		</band>
 	</title>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="53" splitType="Stretch">
 			<subreport>
-				<reportElement x="0" y="0" width="552" height="125" uuid="353cbe2f-bbc3-4bb9-a6b1-ae94fb30e94f"/>
+				<reportElement x="0" y="0" width="552" height="53" uuid="353cbe2f-bbc3-4bb9-a6b1-ae94fb30e94f"/>
 				<subreportParameter name="numero_cliente">
 					<subreportParameterExpression><![CDATA[$F{ID_Cliente}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -80,13 +76,4 @@
 			</subreport>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
